@@ -492,6 +492,10 @@ export class PaneWidget implements IDestroyable, MouseEventHandlers {
 		return this._leftPriceAxisWidget;
 	}
 
+	public getPaneCell(): HTMLElement {
+		return this._paneCell;
+	}
+
 	public rightPriceAxisWidget(): PriceAxisWidget | null {
 		return this._rightPriceAxisWidget;
 	}
@@ -521,7 +525,7 @@ export class PaneWidget implements IDestroyable, MouseEventHandlers {
 	private _drawGrid(ctx: CanvasRenderingContext2D, pixelRatio: number): void {
 		const state = ensureNotNull(this._state);
 		const paneView = state.grid().paneView();
-		const renderer = paneView.renderer(state.height(), state.width());
+		const renderer = paneView.renderer(state.height(), state.width(), state);
 
 		if (renderer !== null) {
 			ctx.save();
@@ -571,7 +575,7 @@ export class PaneWidget implements IDestroyable, MouseEventHandlers {
 			: undefined;
 
 		for (const paneView of paneViews) {
-			const renderer = paneView.renderer(height, width);
+			const renderer = paneView.renderer(height, width, state);
 			if (renderer !== null) {
 				ctx.save();
 				drawFn(renderer, ctx, pixelRatio, isHovered, objecId);
@@ -581,8 +585,9 @@ export class PaneWidget implements IDestroyable, MouseEventHandlers {
 	}
 
 	private _hitTestPaneView(paneViews: readonly IPaneView[], x: Coordinate, y: Coordinate): HitTestPaneViewResult | null {
+		const state = ensureNotNull(this._state);
 		for (const paneView of paneViews) {
-			const renderer = paneView.renderer(this._size.h, this._size.w);
+			const renderer = paneView.renderer(this._size.h, this._size.w, state);
 			if (renderer !== null && renderer.hitTest) {
 				const result = renderer.hitTest(x, y);
 				if (result !== null) {

@@ -712,6 +712,9 @@ export interface SeriesOptionsCommon {
 	 * ```
 	 */
 	autoscaleInfoProvider?: AutoscaleInfoProvider;
+	overlay?: boolean;
+	/** Panel this series to be added */
+	pane?: number;
 }
 
 /**
