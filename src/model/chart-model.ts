@@ -225,15 +225,16 @@ export interface ChartOptions {
 	 * @defaultValue If `0` (default) or none value provided, then a size of the widget will be calculated based its container's size.
 	 */
 	height: number;
-
 	/**
-	 * Watermark options.
-	 *
-	 * A watermark is a background label that includes a brief description of the drawn data. Any text can be added to it.
-	 *
-	 * Please make sure you enable it and set an appropriate font color and size to make your watermark visible in the background of the chart.
-	 * We recommend a semi-transparent color and a large font. Also note that watermark position can be aligned vertically and horizontally.
-	 */
+	 * Setting this flag to `true` makes chart monitoring container and changing its size on every container resize.
+	 * This feature requires [`ResizeObserver`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) class to be available in the global scope.
+	 * Note that calling code is responsible for providing a polyfill if required. If the global scope does not have `ResizeObserver`, a warning will appear and the flag will be ignored.
+	 * Please pay your attention that `autoSize` option and explicit sizes options `width` and `height` conflict one with others.
+	 * If you specify `autoSize` flag, `width` and `height` options will be ignored in common case and could only be used as fallback if using `ResizeObserver` has failed.
+	 * The flag `autoSize` could also be set with and unset with `applyOptions` function.
+	 * */
+	autoSize: boolean;
+	/** Structure with watermark options */
 	watermark: WatermarkOptions;
 
 	/**

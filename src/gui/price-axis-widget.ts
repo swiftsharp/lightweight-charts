@@ -211,16 +211,13 @@ export class PriceAxisWidget implements IDestroyable {
 
 		const resultTickMarksMaxWidth = tickMarkMaxWidth || Constants.DefaultOptimalWidth;
 
-		let res = Math.ceil(
+		return Math.ceil(
 			rendererOptions.borderSize +
 			rendererOptions.tickLength +
 			rendererOptions.paddingInner +
 			rendererOptions.paddingOuter +
 			resultTickMarksMaxWidth
 		);
-		// make it even
-		res += res % 2;
-		return res;
 	}
 
 	public setSize(size: Size): void {
