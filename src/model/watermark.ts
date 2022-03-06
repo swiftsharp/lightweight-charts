@@ -51,6 +51,13 @@ export interface WatermarkOptions {
 	fontStyle: string;
 
 	/**
+	 * Vertical offset in pixels.
+	 *
+	 * @defaultValue `0`
+	 */
+	vertOffset: number;
+
+	/**
 	 * Horizontal alignment inside the chart area.
 	 *
 	 * @defaultValue `'center'`

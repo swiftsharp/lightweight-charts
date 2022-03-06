@@ -23,8 +23,8 @@ import { SeriesPlotRow } from '../model/series-data';
 import { OriginalTime, TimePointIndex } from '../model/time-data';
 
 import { createPreconfiguredCanvas, getCanvasDevicePixelRatio, getContext2D, Size } from './canvas-utils';
-import { PaneSeparator, SEPARATOR_HEIGHT } from './pane-separator';
 import { InternalLayoutSizeHints, InternalLayoutSizeHintsKeepOdd } from './internal-layout-sizes-hints';
+import { PaneSeparator, SEPARATOR_HEIGHT } from './pane-separator';
 // import { PaneSeparator, SEPARATOR_HEIGHT } from './pane-separator';
 import { PaneWidget } from './pane-widget';
 import { TimeAxisWidget } from './time-axis-widget';
@@ -201,7 +201,8 @@ export class ChartWidget implements IDestroyable {
 		}
 
 		for (let i = 0; i < this._paneWidgets.length; i++) {
-			this._paneWidgets[i].paint(invalidateMask.invalidateForPane(i).level);
+			const isRenderWatermark = i === 0;
+			this._paneWidgets[i].paint(invalidateMask.invalidateForPane(i).level, isRenderWatermark);
 		}
 
 		if (this._options.timeScale.visible) {
@@ -419,10 +420,17 @@ export class ChartWidget implements IDestroyable {
 		// we need this to avoid rounding error while calculating with stretchFactor
 		const actualTimeAxisHeight = Math.max(0, height - accumulatedHeight - separatorsHeight);
 
+		/*
 		this._timeAxisWidget.setSizes(
 			new Size(timeAxisVisible ? paneWidth : 0, actualTimeAxisHeight),
 			timeAxisVisible ? leftPriceAxisWidth : 0,
 			timeAxisVisible ? rightPriceAxisWidth : 0
+		);*/
+
+		this._timeAxisWidget.setSizes(
+			new Size(paneWidth, actualTimeAxisHeight),
+			leftPriceAxisWidth,
+			rightPriceAxisWidth
 		);
 
 		this._model.setWidth(paneWidth);

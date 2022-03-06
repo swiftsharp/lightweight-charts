@@ -295,7 +295,6 @@ export interface ChartOptions {
 	/** @inheritDoc TrackingModeOptions
 	 */
 	trackingMode: TrackingModeOptions;
-
 }
 
 export type ChartOptionsInternal =

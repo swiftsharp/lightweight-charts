@@ -9,6 +9,7 @@ export const watermarkOptionsDefaults: WatermarkOptions = {
 	fontFamily: defaultFontFamily,
 	fontStyle: '',
 	text: '',
+	vertOffset: 0,
 	horzAlign: 'center',
 	vertAlign: 'center',
 };

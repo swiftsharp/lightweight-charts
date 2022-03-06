@@ -16,6 +16,7 @@ export class WatermarkPaneView implements IUpdatablePaneView {
 		height: 0,
 		width: 0,
 		lines: [],
+		vertOffset: 0,
 		vertAlign: 'center',
 		horzAlign: 'center',
 	};
@@ -58,7 +59,7 @@ export class WatermarkPaneView implements IUpdatablePaneView {
 				text: options.text,
 				font: makeFont(options.fontSize, options.fontFamily, options.fontStyle),
 				lineHeight: options.fontSize * 1.2,
-				vertOffset: 0,
+				vertOffset: options.vertOffset,
 				zoom: 0,
 			},
 		];

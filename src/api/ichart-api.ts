@@ -260,15 +260,15 @@ export interface IChartApi {
 	/**
 	 * Removes a pane with index
 	 *
-	 * @param index the pane to be removed
+	 * @param index - the pane to be removed
 	 */
 	removePane(index: number): void;
 
 	/**
 	 * swap the position of two panes.
 	 *
-	 * @param first the first index
-	 * @param second the second index
+	 * @param first - the first index
+	 * @param second - the second index
 	 */
 	swapPane(first: number, second: number): void;
 

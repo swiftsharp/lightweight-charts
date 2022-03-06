@@ -23,6 +23,7 @@ export interface WatermarkRendererData {
 	height: number;
 	width: number;
 	visible: boolean;
+	vertOffset: number;
 	horzAlign: HorzAlign;
 	vertAlign: VertAlign;
 }

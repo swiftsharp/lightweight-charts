@@ -42,5 +42,3 @@ declare var ResizeObserverSize: {
 interface ResizeObserverCallback {
 	(entries: ResizeObserverEntry[], observer: ResizeObserver): void;
 }
-
-type ResizeObserverBoxOptions = "border-box" | "content-box" | "device-pixel-content-box";

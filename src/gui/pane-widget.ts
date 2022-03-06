@@ -117,6 +117,17 @@ export class PaneWidget implements IDestroyable, MouseEventHandlers {
 
 		this._paneCell.appendChild(paneWrapper);
 
+		/*
+		const legend = document.createElement('span');
+		legend.className = 'rz-camera-icon';
+		legend.style.zIndex = '3';
+		legend.style.position = 'relative';
+		legend.style.display = 'block';
+		legend.style.left = 3 + 'px';
+		legend.style.top = 3 + 'px';
+		legend.innerHTML = 'MA10 <span style="color:red">' + 34 + '</span>';
+		paneWrapper.appendChild(legend);
+		*/
 		this._canvasBinding = createBoundCanvas(paneWrapper, new Size(16, 16));
 		this._canvasBinding.subscribeCanvasConfigured(this._canvasConfiguredHandler);
 		const canvas = this._canvasBinding.canvas;
@@ -450,7 +461,7 @@ export class PaneWidget implements IDestroyable, MouseEventHandlers {
 		return this._canvasBinding.canvas;
 	}
 
-	public paint(type: InvalidationLevel): void {
+	public paint(type: InvalidationLevel, isRenderWatermark: boolean): void {
 		if (type === InvalidationLevel.None) {
 			return;
 		}
@@ -476,7 +487,9 @@ export class PaneWidget implements IDestroyable, MouseEventHandlers {
 			this._drawBackground(ctx, this._canvasBinding.pixelRatio);
 			if (this._state) {
 				this._drawGrid(ctx, this._canvasBinding.pixelRatio);
-				this._drawWatermark(ctx, this._canvasBinding.pixelRatio);
+				if (isRenderWatermark) {
+					this._drawWatermark(ctx, this._canvasBinding.pixelRatio);
+				}
 				this._drawSources(ctx, this._canvasBinding.pixelRatio, sourcePaneViews);
 			}
 			ctx.restore();
